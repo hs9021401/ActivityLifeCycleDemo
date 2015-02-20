@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ActivityLifeCycleDemo</string>
+
+    <string name="name">姓名:</string>
+    <string name="age">年齡:</string>
+    <string name="showdialog">跳出視窗</string>
+    <string name="gosecact">前往其他畫面</string>
+    <string name="action_settings">Settings</string>
+
+
+    <string name="title_activity_second">SecondActivity</string>
+    <string name="label">收到訊息如下:</string>
+
+</resources>
