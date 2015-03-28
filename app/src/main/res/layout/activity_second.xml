@@ -37,4 +37,16 @@
         android:layout_height="wrap_content"
         android:id="@+id/age2"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="回傳"
+        android:id="@+id/btnRet" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="取消"
+        android:id="@+id/btnCancel" />
+
 </LinearLayout>

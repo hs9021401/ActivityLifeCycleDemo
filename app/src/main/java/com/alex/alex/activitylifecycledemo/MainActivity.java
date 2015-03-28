@@ -9,12 +9,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class MainActivity extends Activity {
-    static final String LOG_TAG = "##DEMO##";
-    Button btnShowDialog, btnGoSecAct;
+    final String LOG_TAG = "##DEMO##";
+    final int REQUEST_CODE = 0;
+
+    Button btnGoSecAct;
     EditText edtName, edtAge;
+    TextView txtReturnData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,7 @@ public class MainActivity extends Activity {
         edtName = (EditText)findViewById(R.id.name);
         edtAge = (EditText)findViewById(R.id.age);
         btnGoSecAct = (Button)findViewById(R.id.GoSecAct);
+        txtReturnData = (TextView)findViewById(R.id.returnData);
 
         btnGoSecAct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,13 +42,37 @@ public class MainActivity extends Activity {
                 int age = Integer.valueOf(edtAge.getText().toString());
 
                 Intent it = new Intent(MainActivity.this, SecondActivity.class);
-                it.putExtra("name" , name);
-                it.putExtra("age", age);
-                startActivity(it);
+                it.putExtra("TAG_Name" , name);
+                it.putExtra("TAG_Age", age);
+
+                //Method 1: 單純跳轉畫面
+                //startActivity(it);
+
+                //Method 2:
+                startActivityForResult(it,REQUEST_CODE);
             }
         });
-
     }
+
+    //Method 2: 跳轉畫面後, 回來主畫面將會接收回傳的資料
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode != REQUEST_CODE)
+            return;
+
+        switch(resultCode){
+            case RESULT_OK:
+                Bundle bundle = data.getExtras();
+                String strData = bundle.getString("DATA");
+                txtReturnData.setText(strData);
+                break;
+
+            case RESULT_CANCELED:
+                txtReturnData.setText("SecondActivity已按下取消");
+                break;
+        }
+    }
+
 
 
     @Override
